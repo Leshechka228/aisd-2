@@ -8,28 +8,28 @@
 using namespace std;
 
 template <typename T>
-struct Node {
-    T data;
-    Node* next;
-    Node* prev;
-
-    Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
-};
-
-template <typename T>
 class LinkedList {
+
+public:
+    struct Node {
+        T data;
+        Node* next;
+        Node* prev;
+
+        Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
+    };
 private:
 
-    Node<T>* head;
-    Node<T>* tail;
+    Node* head;
+    Node* tail;
 
 public:
 
-    Node<T>* get_head() {
+    Node* get_head() const {
         return head;
     }
 
-    Node<T>* get_tail() {
+    Node* get_tail() const {
         return tail;
     }
 
@@ -231,31 +231,36 @@ public:
     T& operator[](size_t index) {
         return const_cast<T&>(static_cast<const LinkedList&>(*this)[index]);
     }
-
-    friend ostream& operator<<(ostream& os, const LinkedList& list) {
-        typename LinkedList<T>::Node* current = list.get_head;
-
-        os << "[";
-        while (current != nullptr) {
-            os << current->data;
-            if (current->next != nullptr) {
-                os << ", ";
-            }
-            current = current->next;
-        }
-        os << "]";
-
-        return os;
-    }
 };
 
+template<typename T>
+ostream& operator<<(ostream& os, const LinkedList<T>& list) {
+    typename LinkedList<T>::Node* current = list.get_head();
+
+    os << "[";
+
+    while (current != nullptr) {
+        os << current->data;
+        current = current->next;
+
+        if (current != nullptr) {
+            os << ", ";
+        }
+    }
+
+    os << "]";
+
+    return os;
+}
+
 template <typename T>
-LinkedList<T> sum(const LinkedList<T>& list1, const LinkedList<T>& list2) {
+LinkedList<T> sum_(const LinkedList<T>& list1, const LinkedList<T>& list2) {
     LinkedList<T> result;
 
-    typename LinkedList<T>::Node* current1 = list1.get_tail;
-    typename LinkedList<T>::Node* current2 = list2.get_tail;
-    int carry = 0;
+    typename LinkedList<T>::Node* current1 = list1.get_tail();
+    typename LinkedList<T>::Node* current2 = list2.get_tail();
+
+    T carry = 0; // Перенос на следующий разряд, изначально равен 0
 
     while (current1 != nullptr || current2 != nullptr) {
         T sum = carry;
@@ -270,37 +275,101 @@ LinkedList<T> sum(const LinkedList<T>& list1, const LinkedList<T>& list2) {
             current2 = current2->prev;
         }
 
-        carry = sum / 10;
-        sum = sum % 10;
+        carry = sum / 10; // Вычисляем перенос на следующий разряд
+        T digit = sum % 10; // Вычисляем текущий разряд результата
 
-        result.push_tail(sum);
+        result.push_head(digit);
     }
 
     if (carry != 0) {
-        result.push_tail(carry);
+        result.push_head(carry); // Если остался перенос, добавляем его в начало списка
+    }
+
+    return result;
+}
+
+
+template <typename T>
+LinkedList<T> multiply(const LinkedList<T>& num1, const LinkedList<T>& num2) {
+    // Получаем указатели на головы чисел
+    typename LinkedList<T>::Node* head1 = num1.get_head();
+    typename LinkedList<T>::Node* head2 = num2.get_head();
+
+    // Проверяем, является ли одно из чисел нулем
+    if (head1 == nullptr || head2 == nullptr) {
+        return LinkedList<T>();
+    }
+
+    // Создаем новый список для хранения результата
+    LinkedList<T> result;
+
+    // Умножаем каждую цифру первого числа на каждую цифру второго числа
+    typename LinkedList<T>::Node* current1 = head1;
+    while (current1 != nullptr) {
+        typename LinkedList<T>::Node* current2 = head2;
+        while (current2 != nullptr) {
+            // Вычисляем произведение текущих цифр
+            T product = current1->data * current2->data;
+
+            // Добавляем текущее произведение к результату
+            result.push_tail(product);
+
+            current2 = current2->next;
+        }
+        current1 = current1->next;
+    }
+
+    // Обрабатываем переносы в разрядах и формируем конечный результат
+    typename LinkedList<T>::Node* current = result.get_head();
+    typename LinkedList<T>::Node* prev = nullptr;
+    T carry = 0;
+
+    while (current != nullptr) {
+        T sum = current->data + carry;
+        carry = sum / 10;
+        current->data = sum % 10;
+
+        prev = current;
+        current = current->next;
+    }
+
+    // Если остался последний перенос, добавляем его в новый узел
+    if (carry > 0) {
+        prev->next = new typename LinkedList<T>::Node(carry);
     }
 
     return result;
 }
 
 int main() {
-    // Создаем первый связанный список
     LinkedList<int> list1;
-    list1.push_tail(2);
-    list1.push_tail(4);
-    list1.push_tail(6);
+    list1.push_head(3);
+    list1.push_head(2);
 
-    // Создаем второй связанный список
     LinkedList<int> list2;
+    list2.push_head(9);
+    list2.push_head(8);
+    list2.push_head(7);
+    list2.push_head(6);
+
+    LinkedList<int> sum = sum_(list1, list2);
+
+    cout << sum << endl;
+
+    LinkedList<int> list3;
+    list1.push_tail(1);
+    list1.push_tail(2);
+    list1.push_tail(3);
+
+    LinkedList<int> list4;
+    list2.push_tail(4);
     list2.push_tail(5);
-    list2.push_tail(8);
-    list2.push_tail(1);
+    list2.push_tail(6);
 
-    // Вызываем функцию sum для сложения списков
-    LinkedList<int> result = sum(list1, list2);
+    // Умножение списков
+    LinkedList<int> result = multiply(list3, list4);
 
-    // Выводим результат сложения
-    cout << "Результат сложения: " << result;
-
+    // Вывод результата
+    cout << result;
     return 0;
 }
