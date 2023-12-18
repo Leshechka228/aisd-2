@@ -1,0 +1,23 @@
+﻿"Project1.exe" (Win32). Загружено "C:\Users\User\Desktop\aisd 2\aisd lub 2\Debug\Project1.exe". Символы загружены.
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\ntdll.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\kernel32.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\KernelBase.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\msvcp140d.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\ole32.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\ucrtbase.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\rpcrt4.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\combase.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\gdi32.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\win32u.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\gdi32full.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\msvcp_win.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\user32.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\vcruntime140d.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\ucrtbased.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\imm32.dll". 
+Поток 0x1860 завершился с кодом 0 (0x0).
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\kernel.appcore.dll". 
+"Project1.exe" (Win32). Загружено "C:\Windows\SysWOW64\msvcrt.dll". 
+Поток 0x4a44 завершился с кодом 0 (0x0).
+Поток 0x37f4 завершился с кодом 0 (0x0).
+Программа "[27912] Project1.exe" завершилась с кодом 0 (0x0).

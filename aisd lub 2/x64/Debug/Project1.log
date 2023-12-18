@@ -1,2 +1,21 @@
 ﻿  Source.cpp
-  Project1.vcxproj -> C:\Users\User\Desktop\aisd 2\Project1\x64\Debug\Project1.exe
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(128,14): error C2039: "getDegree": не является членом "Polynomial<double>".
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(174,5): message : см. объявление "Polynomial<double>"
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(179,54): message : выполняется компиляция ссылки на экземпляр шаблон функции "T findRootLinear<double>(const Polynomial<T> &)"
+          with
+          [
+              T=double
+          ]
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(132,16): error C2039: "getCoefficient": не является членом "Polynomial<double>".
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(174,5): message : см. объявление "Polynomial<double>"
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(133,16): error C2039: "getCoefficient": не является членом "Polynomial<double>".
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(174,5): message : см. объявление "Polynomial<double>"
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(144,14): error C2039: "getDegree": не является членом "Polynomial<double>".
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(174,5): message : см. объявление "Polynomial<double>"
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(193,83): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<double,double> findRootQuadratic<double>(const Polynomial<double> &)"
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(148,16): error C2039: "getCoefficient": не является членом "Polynomial<double>".
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(174,5): message : см. объявление "Polynomial<double>"
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(149,16): error C2039: "getCoefficient": не является членом "Polynomial<double>".
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(174,5): message : см. объявление "Polynomial<double>"
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(150,16): error C2039: "getCoefficient": не является членом "Polynomial<double>".
+C:\Users\User\Desktop\aisd 2\aisd lub 2\Source.cpp(174,5): message : см. объявление "Polynomial<double>"
