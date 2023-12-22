@@ -288,56 +288,55 @@ LinkedList<T> sum_(const LinkedList<T>& list1, const LinkedList<T>& list2) {
     return result;
 }
 
+template <typename T>
+LinkedList<T> multiply_with_value(const LinkedList<T>& list, const T& value){ // умножение числа в виде списка на обычное число
+    LinkedList<T> result;
+    typename LinkedList<T>::Node* current = list.get_tail();
+    T carry = 0;
+
+    while (current != nullptr) {
+        T product = current->data * value + carry;
+
+        result.push_head(product % 10);
+        carry = product / 10;
+
+        current = current->prev;
+    }
+
+    // Если есть перенос после последнего узла, добавляем новый узел
+    if (carry > 0) {
+        result.push_head(carry);
+    }
+
+    return result;
+}
 
 template <typename T>
 LinkedList<T> multiply(const LinkedList<T>& num1, const LinkedList<T>& num2) {
-    // Получаем указатели на головы чисел
+
     typename LinkedList<T>::Node* head1 = num1.get_head();
     typename LinkedList<T>::Node* head2 = num2.get_head();
+    typename LinkedList<T>::Node* tail2 = num2.get_tail();
 
-    // Проверяем, является ли одно из чисел нулем
     if (head1 == nullptr || head2 == nullptr) {
         return LinkedList<T>();
     }
 
-    // Создаем новый список для хранения результата
     LinkedList<T> result;
-
-    // Умножаем каждую цифру первого числа на каждую цифру второго числа
-    typename LinkedList<T>::Node* current1 = head1;
-    while (current1 != nullptr) {
-        typename LinkedList<T>::Node* current2 = head2;
-        while (current2 != nullptr) {
-            // Вычисляем произведение текущих цифр
-            T product = current1->data * current2->data;
-
-            // Добавляем текущее произведение к результату
-            result.push_tail(product);
-
-            current2 = current2->next;
+    typename LinkedList<T>::Node* current2 = tail2;
+    int zero_count = 0;
+    while (current2 != nullptr) {
+        LinkedList<T> multy;
+        multy = multiply_with_value(num1, current2->data);
+        if (current2 != tail2) {
+            for (int i = zero_count; i > 0; i--) { //если происходит умножение на разряды старше, чем разряд единиц,
+                multy.push_tail(0);                //в конце результирующего списка добавляется соотвественное количество нулей 
+            }
         }
-        current1 = current1->next;
+        result = sum_(result, multy);
+        current2 = current2->prev;
+        zero_count++;
     }
-
-    // Обрабатываем переносы в разрядах и формируем конечный результат
-    typename LinkedList<T>::Node* current = result.get_head();
-    typename LinkedList<T>::Node* prev = nullptr;
-    T carry = 0;
-
-    while (current != nullptr) {
-        T sum = current->data + carry;
-        carry = sum / 10;
-        current->data = sum % 10;
-
-        prev = current;
-        current = current->next;
-    }
-
-    // Если остался последний перенос, добавляем его в новый узел
-    if (carry > 0) {
-        prev->next = new typename LinkedList<T>::Node(carry);
-    }
-
     return result;
 }
 
@@ -357,14 +356,15 @@ int main() {
     cout << sum << endl;
 
     LinkedList<int> list3;
-    list1.push_tail(1);
-    list1.push_tail(2);
-    list1.push_tail(3);
+    list3.push_tail(9);
+    list3.push_tail(1);
+    list3.push_tail(2);
+    list3.push_tail(3);
 
     LinkedList<int> list4;
-    list2.push_tail(4);
-    list2.push_tail(5);
-    list2.push_tail(6);
+    list4.push_tail(4);
+    list4.push_tail(5);
+    list4.push_tail(6);
 
     // Умножение списков
     LinkedList<int> result = multiply(list3, list4);
